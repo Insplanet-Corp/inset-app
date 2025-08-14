@@ -6,11 +6,12 @@ import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/screens/ai_image_screen.dart';
 import 'package:flutter_application_1/screens/ai_product_detail_screen.dart';
 import 'package:flutter_application_1/screens/ai_text_screen.dart';
+import 'package:flutter_application_1/widgets/chats/response_action_list.dart';
 import 'package:flutter_application_1/widgets/custom_app_bar.dart';
 import 'package:flutter_application_1/widgets/custom_button.dart';
 import 'package:flutter_application_1/widgets/custom_text.dart';
-import 'package:flutter_application_1/widgets/typing_sequence.dart';
-import 'package:flutter_application_1/widgets/typing_text.dart';
+import 'package:flutter_application_1/widgets/chats/typing_sequence.dart';
+import 'package:flutter_application_1/widgets/chats/typing_text.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -139,11 +140,7 @@ class _AIScreenState extends State<AIScreen> {
                         //   text: '상세페이지 제작을 위한 모든 것 \nAI가 도와드려요.',
                         //   color: Color(0xFF5D5D5D),
                         // ),
-
-                        // TODO buttonGroupWidget
-                        thirdWidget: Column(
-                          spacing: 8.0,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        thirdWidget: ResponseActionList(
                           children: [
                             CustomButton(
                               variant: 'secondary',

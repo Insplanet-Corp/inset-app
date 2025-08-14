@@ -6,8 +6,8 @@ import 'package:flutter_application_1/widgets/custom_button.dart';
 import 'package:flutter_application_1/widgets/custom_modal_bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/custom_text.dart';
 import 'package:flutter_application_1/widgets/image_with_fallback.dart';
-import 'package:flutter_application_1/widgets/typing_sequence.dart';
-import 'package:flutter_application_1/widgets/typing_text.dart';
+import 'package:flutter_application_1/widgets/chats/typing_sequence.dart';
+import 'package:flutter_application_1/widgets/chats/typing_text.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/custom_app_bar.dart'; // 경로는 프로젝트에 맞게 조정
 
