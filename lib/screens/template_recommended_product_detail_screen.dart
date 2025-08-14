@@ -72,7 +72,7 @@ class _TemplateRecommendedProductDetailScreenState
                   decoration: BoxDecoration(
                     color: Colors.teal[100 * ((index % 8) + 1)],
                     border: Border.all(color: Colors.black, width: 1),
-                    // borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                   child: Center(child: Text('Item $index')),
                 );
