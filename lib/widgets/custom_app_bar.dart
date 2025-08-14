@@ -16,14 +16,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String colorMode;
 
   const CustomAppBar({
-    Key? key,
+    super.key,
     required this.title,
     this.variant = AppBarVariant.up,
     this.onMenuPressed,
     this.onBackPressed,
     this.actions,
     this.colorMode = 'light',
-  }) : super(key: key);
+  });
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
