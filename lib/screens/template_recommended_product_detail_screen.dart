@@ -37,7 +37,7 @@ class _TemplateRecommendedProductDetailScreenState
           IconButton(
             icon: const Icon(Icons.notifications_none),
             onPressed: () {
-              print('알림 클릭됨');
+              print('알림');
             },
           ),
         ],
