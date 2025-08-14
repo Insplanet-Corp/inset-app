@@ -16,14 +16,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String colorMode;
 
   const CustomAppBar({
-    Key? key,
+    super.key,
     required this.title,
     this.variant = AppBarVariant.up,
     this.onMenuPressed,
     this.onBackPressed,
     this.actions,
     this.colorMode = 'light',
-  }) : super(key: key);
+  });
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -111,14 +111,14 @@ class MenuScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.notifications),
             onPressed: () {
-              print('Notifications pressed');
+              debugPrint('Notifications pressed');
             },
           ),
           IconButton(
             icon: Icon(Icons.close), // 닫기 아이콘
             onPressed: () {
               // 닫기 버튼을 눌렀을 때 동작할 코드
-              print('Close button pressed');
+              debugPrint('Close button pressed');
               // 예를 들어 현재 화면을 닫으려면 Navigator.pop(context) 사용
               Navigator.pop(context); // 현재 화면을 닫기
             },
@@ -139,7 +139,7 @@ class MenuScreen extends StatelessWidget {
             onTap: () {
               // Navigator.push(
               //     context, MaterialPageRoute(builder: (context) => ));
-              print('');
+              debugPrint('Pressed');
             },
           ),
 
@@ -177,7 +177,7 @@ class MenuScreen extends StatelessWidget {
                       // elevation: 5,
                     ),
                     onPressed: () {
-                      print('배너 버튼 클릭됨');
+                      debugPrint('배너 버튼 클릭됨');
                     },
                     child: Text('더 알아보기'),
                   ),
