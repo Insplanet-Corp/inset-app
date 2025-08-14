@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class ChatBubble extends StatelessWidget {
   final String message;
   final bool isUser; // 사용자 메시지인지, 다른 사람의 메시지인지 구분
-  // final DateTime timestamp;
+  final DateTime? timestamp;
 
   const ChatBubble({
     required this.message,
     required this.isUser,
-    // required this.timestamp,
+    this.timestamp,
   });
 
   @override
