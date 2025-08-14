@@ -124,7 +124,7 @@ class _AIImageScreenState extends State<AIImageScreen> {
                     fallbackImageUrl: 'assets/images/image_fallback.svg',
                     loadingImageAsset: 'assets/images/image_fallback.svg',
                   ),
-                  fourthWidget: ActionList(
+                  fourthWidget: ResponseActionList(
                     children: [
                       CustomButton(
                         variant: 'secondary2',
