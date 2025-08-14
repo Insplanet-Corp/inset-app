@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'custom_text.dart'; // CustomText가 정의된 파일 import
+import '../custom_text.dart'; // CustomText가 정의된 파일 import
 
 class TypingText extends StatefulWidget {
   final String text;

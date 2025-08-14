@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/screens/ai_screen.dart';
-import 'package:flutter_application_1/widgets/action_list.dart';
-import 'package:flutter_application_1/widgets/chat_bubble.dart';
+import 'package:flutter_application_1/widgets/chats/response_action_list.dart';
+import 'package:flutter_application_1/widgets/chats/chat_bubble.dart';
 import 'package:flutter_application_1/widgets/custom_button.dart';
 import 'package:flutter_application_1/widgets/custom_text.dart';
-import 'package:flutter_application_1/widgets/typing_sequence.dart';
-import 'package:flutter_application_1/widgets/typing_text.dart';
+import 'package:flutter_application_1/widgets/chats/typing_sequence.dart';
+import 'package:flutter_application_1/widgets/chats/typing_text.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/custom_app_bar.dart'; // 경로는 프로젝트에 맞게 조정
 
@@ -59,14 +59,12 @@ class _AiTextScreenState extends State<AiTextScreen> {
                   text: '상세페이지 내용, SNS 게시물 등 \n상품 홍보를 위한 내용을 자동으로 만들어 드려요.',
                   color: Color(0xFF5D5D5D),
                 ),
-                thirdWidget: Column(
-                  spacing: 8.0,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                thirdWidget: ResponseActionList(
                   children: [
                     CustomButton(
                       variant: 'secondary',
                       size: 'medium',
-                      text: '상품 상세페이지',
+                      text: '상품 상세페이지 내용',
                       onPressed: () {
                         _updateButtonState(ButtonState.productDetail);
                       },
@@ -98,7 +96,7 @@ class _AiTextScreenState extends State<AiTextScreen> {
               // 상태에 맞는 위젯을 출력하는 StatusWidget
               StatusWidget(selectedButtonState: selectedButtonState), // 여기서 전달
 
-              ActionList(
+              ResponseActionList(
                 children: [
                   CustomButton(
                     variant: 'secondary2',
