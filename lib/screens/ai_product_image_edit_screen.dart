@@ -7,7 +7,7 @@ import 'package:flutter_application_1/widgets/custom_icon_button.dart';
 import 'package:flutter_application_1/widgets/custom_modal_bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/custom_text.dart';
 import 'package:flutter_application_1/widgets/image_with_fallback.dart';
-import 'package:flutter_application_1/widgets/typing_text.dart';
+import 'package:flutter_application_1/widgets/chats/typing_text.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/widgets/typing_text.dart';
+import 'package:flutter_application_1/widgets/chats/typing_text.dart';
 
 class TypingSequence extends StatefulWidget {
   final Widget? firstWidget;

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/ai_screen.dart';
-import 'package:flutter_application_1/widgets/action_list.dart';
+import 'package:flutter_application_1/widgets/chats/response_action_list.dart';
 import 'package:flutter_application_1/widgets/custom_button.dart';
 import 'package:flutter_application_1/widgets/custom_text.dart';
 import 'package:flutter_application_1/widgets/image_with_fallback.dart';
-import 'package:flutter_application_1/widgets/typing_sequence.dart';
-import 'package:flutter_application_1/widgets/typing_text.dart';
+import 'package:flutter_application_1/widgets/chats/typing_sequence.dart';
+import 'package:flutter_application_1/widgets/chats/typing_text.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/custom_app_bar.dart'; // 경로는 프로젝트에 맞게 조정
 
@@ -79,9 +79,7 @@ class _AIImageScreenState extends State<AIImageScreen> {
                   variant: "label1",
                   text: '상품 이미지만 올려주세요. \nAI가 자동으로 어울리는 배경을 만들어 드려요.',
                 ),
-                thirdWidget: Column(
-                  spacing: 8.0,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                thirdWidget: ResponseActionList(
                   children: [
                     CustomButton(
                         variant: 'secondary',
@@ -126,7 +124,7 @@ class _AIImageScreenState extends State<AIImageScreen> {
                     fallbackImageUrl: 'assets/images/image_fallback.svg',
                     loadingImageAsset: 'assets/images/image_fallback.svg',
                   ),
-                  fourthWidget: ActionList(
+                  fourthWidget: ResponseActionList(
                     children: [
                       CustomButton(
                         variant: 'secondary2',
@@ -186,7 +184,7 @@ class _AIImageScreenState extends State<AIImageScreen> {
                     variant: "label1",
                     text: '업로드한 이미지의 배경을 자동으로 제거해 드려요.',
                   ),
-                  thirdWidget: ActionList(
+                  thirdWidget: ResponseActionList(
                     children: [
                       CustomButton(
                         variant: 'secondary2',
