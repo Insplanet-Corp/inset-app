@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // 리스너를 사용해 사용자의 로그인 상태를 추적하면 이러한 상황을 처리할 필요가 없습니다.
         FirebaseAuth.instance.authStateChanges().listen((User? user) {
           if (user != null) {
-            print(user.uid);
+            debugPrint(user.uid);
           }
         });
       } on FirebaseAuthException catch (e) {
@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
         });
       } catch (e) {
         // 일반적인 오류 처리
-        print("General error: $e");
+        debugPrint("General error: $e");
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content: Text('Something went wrong. Please try again later.')),
@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
         SnackBar(content: Text(feedbackMessage)),
       );
     } catch (e) {
-      print(e);
+      debugPrint("error: $e");
     }
   }
 
@@ -159,14 +159,14 @@ class _LoginScreenState extends State<LoginScreen> {
         _user = userCredential.user;
       });
 
-      print("Signed in with Google: ${_user?.displayName}");
+      debugPrint("Signed in with Google: ${_user?.displayName}");
 
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
       );
     } catch (e) {
-      print("Google sign-in error: $e");
+      debugPrint("Google sign-in error: $e");
     }
   }
 
