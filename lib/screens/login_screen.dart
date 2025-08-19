@@ -304,18 +304,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all(Colors.white), // 버튼 색상
+                      WidgetStateProperty.all(Colors.white), // 버튼 색상
                   foregroundColor:
-                      MaterialStateProperty.all(Colors.black), // 텍스트 색상
-                  padding: MaterialStateProperty.all(
+                      WidgetStateProperty.all(Colors.black), // 텍스트 색상
+                  padding: WidgetStateProperty.all(
                       EdgeInsets.symmetric(horizontal: 50, vertical: 20)), // 패딩
-                  shape: MaterialStateProperty.all(
+                  shape: WidgetStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                       side: BorderSide(color: Color(0xFFD1D1D1), width: 1),
                     ),
                   ),
-                  elevation: MaterialStateProperty.all(0),
+                  elevation: WidgetStateProperty.all(0),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -338,18 +338,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all(Colors.white), // 버튼 색상
+                      WidgetStateProperty.all(Colors.white), // 버튼 색상
                   foregroundColor:
-                      MaterialStateProperty.all(Colors.black), // 텍스트 색상
-                  padding: MaterialStateProperty.all(
+                      WidgetStateProperty.all(Colors.black), // 텍스트 색상
+                  padding: WidgetStateProperty.all(
                       EdgeInsets.symmetric(horizontal: 50, vertical: 20)), // 패딩
-                  shape: MaterialStateProperty.all(
+                  shape: WidgetStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                       side: BorderSide(color: Color(0xFFD1D1D1), width: 1),
                     ),
                   ),
-                  elevation: MaterialStateProperty.all(0),
+                  elevation: WidgetStateProperty.all(0),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
