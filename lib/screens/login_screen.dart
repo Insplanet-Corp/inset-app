@@ -1,16 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/constants/toekns_constants.dart';
 import 'package:flutter_application_1/screens/home_screen.dart';
 import 'package:flutter_application_1/widgets/custom_app_bar.dart';
 import 'package:flutter_application_1/widgets/custom_button.dart';
 import 'package:flutter_application_1/widgets/custom_checkbox.dart';
 import 'package:flutter_application_1/widgets/custom_column.dart';
 import 'package:flutter_application_1/widgets/custom_form.dart';
-import 'package:flutter_application_1/widgets/custom_modal_bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/custom_text.dart';
-import 'package:flutter_application_1/widgets/custom_text_field.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -54,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // 리스너를 사용해 사용자의 로그인 상태를 추적하면 이러한 상황을 처리할 필요가 없습니다.
         FirebaseAuth.instance.authStateChanges().listen((User? user) {
           if (user != null) {
-            print(user.uid);
+            debugPrint(user.uid);
           }
         });
       } on FirebaseAuthException catch (e) {
@@ -71,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
         });
       } catch (e) {
         // 일반적인 오류 처리
-        print("General error: $e");
+        debugPrint("General error: $e");
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content: Text('Something went wrong. Please try again later.')),
@@ -125,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
         SnackBar(content: Text(feedbackMessage)),
       );
     } catch (e) {
-      print(e);
+      debugPrint("error: $e");
     }
   }
 
@@ -162,14 +159,14 @@ class _LoginScreenState extends State<LoginScreen> {
         _user = userCredential.user;
       });
 
-      print("Signed in with Google: ${_user?.displayName}");
+      debugPrint("Signed in with Google: ${_user?.displayName}");
 
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
       );
     } catch (e) {
-      print("Google sign-in error: $e");
+      debugPrint("Google sign-in error: $e");
     }
   }
 
@@ -304,18 +301,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all(Colors.white), // 버튼 색상
+                      WidgetStateProperty.all(Colors.white), // 버튼 색상
                   foregroundColor:
-                      MaterialStateProperty.all(Colors.black), // 텍스트 색상
-                  padding: MaterialStateProperty.all(
+                      WidgetStateProperty.all(Colors.black), // 텍스트 색상
+                  padding: WidgetStateProperty.all(
                       EdgeInsets.symmetric(horizontal: 50, vertical: 20)), // 패딩
-                  shape: MaterialStateProperty.all(
+                  shape: WidgetStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                       side: BorderSide(color: Color(0xFFD1D1D1), width: 1),
                     ),
                   ),
-                  elevation: MaterialStateProperty.all(0),
+                  elevation: WidgetStateProperty.all(0),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -338,18 +335,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all(Colors.white), // 버튼 색상
+                      WidgetStateProperty.all(Colors.white), // 버튼 색상
                   foregroundColor:
-                      MaterialStateProperty.all(Colors.black), // 텍스트 색상
-                  padding: MaterialStateProperty.all(
+                      WidgetStateProperty.all(Colors.black), // 텍스트 색상
+                  padding: WidgetStateProperty.all(
                       EdgeInsets.symmetric(horizontal: 50, vertical: 20)), // 패딩
-                  shape: MaterialStateProperty.all(
+                  shape: WidgetStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                       side: BorderSide(color: Color(0xFFD1D1D1), width: 1),
                     ),
                   ),
-                  elevation: MaterialStateProperty.all(0),
+                  elevation: WidgetStateProperty.all(0),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
