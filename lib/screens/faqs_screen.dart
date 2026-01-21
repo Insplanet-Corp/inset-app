@@ -4,6 +4,8 @@ import 'package:flutter_application_1/widgets/custom_app_bar.dart';
 import 'package:flutter_application_1/widgets/custom_text.dart';
 
 class FAQsScreen extends StatefulWidget {
+  const FAQsScreen({super.key});
+
   @override
   _FAQsScreenState createState() => _FAQsScreenState();
 }
@@ -53,8 +55,11 @@ class FAQItem extends StatefulWidget {
   final String question;
   final String answer;
 
-  FAQItem(
-      {required this.category, required this.question, required this.answer});
+  const FAQItem(
+      {super.key,
+      required this.category,
+      required this.question,
+      required this.answer});
 
   @override
   _FAQItemState createState() => _FAQItemState();
@@ -74,8 +79,8 @@ class _FAQItemState extends State<FAQItem> {
             expandedAlignment: Alignment.topLeft,
             title:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              CustomText(variant: 'label1', text: widget.category),
-              CustomText(variant: 'h5', text: widget.question),
+              CustomText(variant: VariantType.label1, text: widget.category),
+              CustomText(variant: VariantType.h5, text: widget.question),
             ]),
             children: [
               Padding(
@@ -90,7 +95,7 @@ class _FAQItemState extends State<FAQItem> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: CustomText(
-                    variant: 'body',
+                    variant: VariantType.body,
                     text: widget.answer,
                   ),
                 ),

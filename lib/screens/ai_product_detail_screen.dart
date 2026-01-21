@@ -12,6 +12,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/custom_app_bar.dart'; // 경로는 프로젝트에 맞게 조정
 
 class AiProductDetailScreen extends StatefulWidget {
+  const AiProductDetailScreen({super.key});
+
   @override
   _AIProductDetailScreenState createState() => _AIProductDetailScreenState();
 }
@@ -36,10 +38,10 @@ class _AIProductDetailScreenState extends State<AiProductDetailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // CustomText(variant: 'h4', text: '어떤 이미지를 만들어 드릴까요?'),
+              // CustomText(variant: VariantType.h4, text: '어떤 이미지를 만들어 드릴까요?'),
               // SizedBox(height: 8),
               // CustomText(
-              //   variant: 'label1',
+              //   variant: VariantType.label1,
               //   text: '상품 이미지만 올려주세요. \nAI가 자동으로 어울리는 배경을 만들어 드려요.',
               //   color: Color(0xFF5D5D5D),
               // ),
@@ -68,11 +70,11 @@ class _AIProductDetailScreenState extends State<AiProductDetailScreen> {
               SizedBox(height: 16),
               TypingSequence(
                 firstWidget: TypingText(
-                  variant: "h4",
+                  variant: VariantType.h4,
                   text: '상품에 대한 내용을 알려주세요.',
                 ),
                 secondWidget: TypingText(
-                  variant: "label1",
+                  variant: VariantType.label1,
                   text: '상품의 구체적인 특징이나 상세한 정보를 알려주시면, 더 완성도 있게 작성할 수 있어요.',
                 ),
                 // TODO buttonGroupWidget
@@ -183,7 +185,7 @@ class _AIProductDetailScreenState extends State<AiProductDetailScreen> {
                   spacing: 8,
                   children: [
                     TypingText(
-                      variant: "label1",
+                      variant: VariantType.label1,
                       text: 'AI가 이미지를 만들고 있어요. \n약간의 시간이 소요됩니다.',
                       onProgress: (progress) {
                         if (progress > 0.85 && !showFourthWidget) {

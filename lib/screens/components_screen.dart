@@ -28,12 +28,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ComponentsScreen extends ConsumerStatefulWidget {
+  const ComponentsScreen({super.key});
+
   @override
   _ComponentsScreenState createState() => _ComponentsScreenState();
 }
 
 class _ComponentsScreenState extends ConsumerState<ComponentsScreen> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -186,9 +188,11 @@ class _ComponentsScreenState extends ConsumerState<ComponentsScreen> {
                 ),
                 Result(title: '페이지가 없습니다.', description: '내용입니다'),
                 CustomText(
-                    variant: 'title', text: 'Title 텍스트', color: Colors.indigo),
-                CustomText(variant: 'body', text: 'body 텍스트'),
-                CustomText(variant: 'label', text: 'label 텍스트'),
+                    variant: VariantType.title,
+                    text: 'Title 텍스트',
+                    color: Colors.indigo),
+                CustomText(variant: VariantType.body, text: 'body 텍스트'),
+                CustomText(variant: VariantType.label, text: 'label 텍스트'),
 
                 Column(spacing: 4.0, children: [
                   CustomButton(
@@ -377,7 +381,7 @@ class _ComponentsScreenState extends ConsumerState<ComponentsScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             CustomText(
-                                variant: 'body',
+                                variant: VariantType.body,
                                 text: 'This is a typical dialog.'),
                             const SizedBox(height: 4),
                             const Text('This is a typical dialog.'),

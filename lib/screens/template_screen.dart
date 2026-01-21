@@ -12,6 +12,8 @@ int _selectedIndex1 = 0;
 
 // 메인 템플릿 화면
 class TemplateScreen extends StatefulWidget {
+  const TemplateScreen({super.key});
+
   @override
   _TemplateScreenState createState() => _TemplateScreenState();
 }
@@ -52,7 +54,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomText(variant: 'h5', text: '추천 상세페이지'),
+                    CustomText(variant: VariantType.h5, text: '추천 상세페이지'),
                     RawMaterialButton(
                       padding: EdgeInsets.zero,
                       constraints: BoxConstraints(),
@@ -64,7 +66,8 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                   TemplateRecommendedProductDetailScreen()),
                         );
                       },
-                      child: CustomText(variant: 'label2', text: '모두보기'),
+                      child:
+                          CustomText(variant: VariantType.label2, text: '모두보기'),
                     ),
                   ]),
             ),
@@ -110,7 +113,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CustomText(variant: 'h5', text: '템플릿 둘러보기'),
+                      CustomText(variant: VariantType.h5, text: '템플릿 둘러보기'),
                       RawMaterialButton(
                         padding: EdgeInsets.zero,
                         constraints: BoxConstraints(),
@@ -122,7 +125,8 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                     TemplateRecommendedProductDetailScreen()),
                           );
                         },
-                        child: CustomText(variant: 'label2', text: '모두보기'),
+                        child: CustomText(
+                            variant: VariantType.label2, text: '모두보기'),
                       ),
                     ],
                   ),

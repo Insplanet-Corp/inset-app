@@ -20,6 +20,8 @@ import 'dart:convert';
 import '../widgets/custom_app_bar.dart';
 
 class AiProductImageEditScreen extends StatefulWidget {
+  const AiProductImageEditScreen({super.key});
+
   @override
   _AIProductImageEditScreenState createState() =>
       _AIProductImageEditScreenState();
@@ -192,7 +194,7 @@ class _AIProductImageEditScreenState extends State<AiProductImageEditScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CustomText(
-                        variant: 'label1',
+                        variant: VariantType.label1,
                         text: '📥 HTML input 값: $_inputValue',
                         color: Colors.white,
                       ),
@@ -216,7 +218,7 @@ class _AIProductImageEditScreenState extends State<AiProductImageEditScreen> {
               ),
 
               // 🔧 Expanded 제거하고 고정 높이로 변경
-              Container(
+              SizedBox(
                 height: 300,
                 child: _buildViewer(selectedIndex),
               ),

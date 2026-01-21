@@ -8,12 +8,12 @@ class TypingSequence extends StatefulWidget {
   final Widget? fourthWidget;
 
   const TypingSequence({
-    Key? key,
+    super.key,
     this.firstWidget,
     this.secondWidget,
     this.thirdWidget,
     this.fourthWidget,
-  }) : super(key: key);
+  });
 
   @override
   State<TypingSequence> createState() => _TypingSequenceState();
@@ -68,11 +68,11 @@ class _TypingSequenceState extends State<TypingSequence> {
               });
             }
           }),
-          const SizedBox(height: 24),
+          const SizedBox(height: 12),
         ],
         if (showFourthWidget && widget.fourthWidget != null) ...[
           widget.fourthWidget!,
-          const SizedBox(height: 24),
+          const SizedBox(height: 12),
         ],
       ],
     );

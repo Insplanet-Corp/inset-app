@@ -22,10 +22,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   String errorMessage = '';
 
   final _formKey = GlobalKey<FormState>();
@@ -204,7 +204,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start, // 왼쪽 정렬
                 mainAxisSize: MainAxisSize.min, // Column의 높이를 내용에 맞춤
                 children: [
-                  CustomText(variant: 'title', text: '서비스 이용을 위해\n동의가 필요해요'),
+                  CustomText(
+                      variant: VariantType.title, text: '서비스 이용을 위해\n동의가 필요해요'),
                   SizedBox(height: 24),
                   CustomCheckbox(
                     value: _termsChecked,
@@ -276,9 +277,10 @@ class _LoginScreenState extends State<LoginScreen> {
         child: CustomForm(
           formKey: _formKey,
           children: [
-            CustomText(variant: 'title', text: '시작해볼까요?'),
+            CustomText(variant: VariantType.title, text: '시작해볼까요?'),
             CustomText(
-                variant: 'label-large', text: '로그인하고 AI와 함께 상세페이지를 만들어요!'),
+                variant: VariantType.labelLarge,
+                text: '로그인하고 AI와 함께 상세페이지를 만들어요!'),
             SizedBox(height: 40),
 
             if (_user != null)
@@ -293,7 +295,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
 
-            Container(
+            SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
@@ -322,12 +324,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Colors.black,
                     ),
                     SizedBox(width: 10),
-                    CustomText(variant: 'label-large', text: 'Apple로 로그인'),
+                    CustomText(
+                        variant: VariantType.labelLarge, text: 'Apple로 로그인'),
                   ],
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
@@ -356,7 +359,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Colors.black,
                     ),
                     SizedBox(width: 10),
-                    CustomText(variant: 'label-large', text: 'Google로 로그인'),
+                    CustomText(
+                        variant: VariantType.labelLarge, text: 'Google로 로그인'),
                   ],
                 ),
               ),

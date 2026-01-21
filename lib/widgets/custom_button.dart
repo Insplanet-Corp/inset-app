@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const double fontSize = 14.0;
-const double borderRadius = 100.0;
+const double borderRadius = 10.0;
 
 class CustomButton extends StatelessWidget {
   final String? size;
@@ -15,6 +15,7 @@ class CustomButton extends StatelessWidget {
   final bool disabled;
 
   const CustomButton({
+    super.key,
     this.size = 'medium',
     this.variant = 'filled',
     this.style = 'primary',
@@ -24,11 +25,10 @@ class CustomButton extends StatelessWidget {
     this.isFullWidth = false,
     this.leadingIcon,
     this.disabled = false,
-  })  : assert(
+  }) : assert(
           (text != null && image == null) || (text == null && image != null),
           'text 또는 image 중 하나만 제공해야 합니다.',
-        ),
-        assert(onPressed != null, 'onPressed는 null일 수 없습니다');
+        );
 
   double _getButtonHeight() {
     switch (size) {
@@ -44,7 +44,7 @@ class CustomButton extends StatelessWidget {
   }
 
   Color _getButtonBackgroundColor() {
-    if (disabled) return Color(0xFFFDD8D7); // ✅ 비활성 배경색
+    if (disabled) return Color(0xFFFDD8D7); // 비활성 배경색
     switch (variant) {
       case 'primary':
         return Color(0xFF373C42);
@@ -58,7 +58,7 @@ class CustomButton extends StatelessWidget {
   }
 
   Color _getTextColor() {
-    if (disabled) return Colors.grey.shade400; // ✅ 비활성 텍스트 색상
+    if (disabled) return Colors.grey.shade400; // 비활성 텍스트 색상
     return leadingIcon != null ? Colors.black : Colors.white;
   }
 
@@ -89,11 +89,22 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Opacity(
-      opacity: disabled ? 0.4 : 1.0, // ✅ 비활성화 시 흐리게
-      child: Container(
+      opacity: disabled ? 0.4 : 1.0, // 비활성화 시 흐리게
+      child: SizedBox(
         width: isFullWidth ? double.infinity : null,
         child: RawMaterialButton(
-          onPressed: disabled ? null : onPressed, // ✅ 터치 비활성화
+          onPressed: disabled ? null : onPressed,
+          constraints: BoxConstraints(
+            minHeight: _getButtonHeight(),
+            maxHeight: _getButtonHeight(),
+          ),
+          padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
+          fillColor: _getButtonBackgroundColor(),
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
+            side: BorderSide(color: _getBorderColor(), width: 1),
+          ), // 터치 비활성화
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -108,23 +119,12 @@ class CustomButton extends StatelessWidget {
                 Text(
                   text!,
                   style: TextStyle(
-                    fontSize: _getFontSize(), // ← 여기에 적용
+                    fontSize: _getFontSize(), // 여기에 적용
                     fontWeight: FontWeight.w600,
                     color: leadingIcon != null ? Colors.black : Colors.white,
                   ),
                 ),
             ],
-          ),
-          constraints: BoxConstraints(
-            minHeight: _getButtonHeight(),
-            maxHeight: _getButtonHeight(),
-          ),
-          padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
-          fillColor: _getButtonBackgroundColor(),
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
-            side: BorderSide(color: _getBorderColor(), width: 1),
           ),
         ),
       ),

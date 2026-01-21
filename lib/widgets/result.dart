@@ -7,7 +7,8 @@ class Result extends StatelessWidget {
   final String title;
   final String description;
 
-  Result({
+  const Result({
+    super.key,
     required this.title,
     required this.description,
   });
@@ -18,8 +19,8 @@ class Result extends StatelessWidget {
       padding: const EdgeInsets.all(60.0),
       spacing: 8,
       children: [
-        CustomText(variant: 'title', text: title),
-        CustomText(variant: 'body', text: description),
+        CustomText(variant: VariantType.title, text: title),
+        CustomText(variant: VariantType.body, text: description),
         SizedBox(height: 20),
         CustomButton(
           variant: 'filled',

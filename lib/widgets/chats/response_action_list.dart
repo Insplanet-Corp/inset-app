@@ -6,11 +6,11 @@ class ResponseActionList extends StatelessWidget {
   final CrossAxisAlignment crossAxisAlignment;
 
   const ResponseActionList({
-    Key? key,
+    super.key,
     required this.children,
     this.spacing = 8.0,
     this.crossAxisAlignment = CrossAxisAlignment.start,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

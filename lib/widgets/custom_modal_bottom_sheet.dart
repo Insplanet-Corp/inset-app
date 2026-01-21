@@ -7,7 +7,8 @@ class CustomModalBottomSheet extends StatelessWidget {
   final Widget? child;
   final double height;
 
-  CustomModalBottomSheet({
+  const CustomModalBottomSheet({
+    super.key,
     required this.title,
     this.child,
     this.height = 200.0,
@@ -35,7 +36,7 @@ class CustomModalBottomSheet extends StatelessWidget {
               children: [
                 Center(
                   child: CustomText(
-                    variant: 'h5',
+                    variant: VariantType.h5,
                     text: title,
                   ),
                 ),

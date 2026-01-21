@@ -20,6 +20,8 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 class AIScreen extends StatefulWidget {
+  const AIScreen({super.key});
+
   @override
   _AIScreenState createState() => _AIScreenState();
 }
@@ -27,14 +29,13 @@ class AIScreen extends StatefulWidget {
 class _AIScreenState extends State<AIScreen> {
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _controller = TextEditingController();
-    String _reply = '';
+    final TextEditingController controller = TextEditingController();
+    String reply = '';
 
-    Uint8List? _imageBytes;
-    String? _error;
+    Uint8List? imageBytes;
 
-    void _onSearch() {
-      print('검색어: ${_controller.text}');
+    void onSearch() {
+      print('검색어: ${controller.text}');
     }
 
     void showDebugDialog(BuildContext context, String message) {
@@ -55,7 +56,7 @@ class _AIScreenState extends State<AIScreen> {
 
     Future<void> sendMessage(String message) async {
       const fastapiUrl =
-          'https://caeb-115-91-159-217.ngrok-free.app/generate-image'; // ⚠️ 실제 환경에서는 IP 주소로 변경
+          'https://caeb-115-91-159-217.ngrok-free.app/generate-image'; // 실제 환경에서는 IP 주소로 변경
       final userId = 'test_user_001'; // 추후 Firebase UID로 교체
 
       try {
@@ -74,8 +75,8 @@ class _AIScreenState extends State<AIScreen> {
           // showDebugDialog(context, data.toString());
 
           setState(() {
-            _reply = 'faf: ${response.body}';
-            _imageBytes = base64Decode(base64Str);
+            reply = 'faf: ${response.body}';
+            imageBytes = base64Decode(base64Str);
           });
           // print('응답 데이터: $data');
           // setState(() {
@@ -85,14 +86,14 @@ class _AIScreenState extends State<AIScreen> {
           // showDebugDialog(context, response.body.toString());
 
           setState(() {
-            _reply = '서버 오류: ${response.statusCode}';
+            reply = '서버 오류: ${response.statusCode}';
           });
         }
       } catch (e) {
         // showDebugDialog(context, e.toString());
 
         setState(() {
-          _reply = '오류 발생: $e';
+          reply = '오류 발생: $e';
         });
       }
     }
@@ -126,17 +127,17 @@ class _AIScreenState extends State<AIScreen> {
                     children: [
                       TypingSequence(
                         firstWidget: TypingText(
-                          variant: 'h3',
+                          variant: VariantType.h3,
                           text: '무엇을 만들어 드릴까요?',
                           textAlign: TextAlign.center,
                         ),
                         secondWidget: TypingText(
-                          variant: 'label1',
+                          variant: VariantType.label1,
                           text: '상세페이지 제작을 위한 모든 것 \nAI가 도와드려요.',
                         ),
                         // SizedBox(height: 8),
                         // CustomText(
-                        //   variant: 'label1',
+                        //   variant: VariantType.label1,
                         //   text: '상세페이지 제작을 위한 모든 것 \nAI가 도와드려요.',
                         //   color: Color(0xFF5D5D5D),
                         // ),
@@ -187,27 +188,27 @@ class _AIScreenState extends State<AIScreen> {
                             Column(
                               children: [
                                 TextField(
-                                  controller: _controller,
+                                  controller: controller,
                                   decoration:
                                       InputDecoration(labelText: '메시지 입력'),
                                 ),
                                 SizedBox(height: 12),
                                 ElevatedButton(
                                   onPressed: () {
-                                    sendMessage(_controller.text);
+                                    sendMessage(controller.text);
                                   },
                                   child: Text("전송"),
                                 ),
                                 SizedBox(height: 24),
-                                Text(_imageBytes == null
+                                Text(imageBytes == null
                                     ? "이미지를 업로드해주세요."
                                     : "이미지 업로드 완료!"),
-                                _imageBytes == null
+                                imageBytes == null
                                     ? CircularProgressIndicator()
-                                    : Image.memory(_imageBytes!),
+                                    : Image.memory(imageBytes!),
                                 Text("응답:"),
                                 Container(
-                                  child: Text(_reply),
+                                  child: Text(reply),
                                 ),
                               ],
                             ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/screens/faqs_screen.dart';
+import 'package:flutter_application_1/screens/home_screen.dart';
+import 'package:flutter_application_1/screens/login_screen.dart';
+import 'package:flutter_application_1/screens/template_screen.dart';
 import 'package:flutter_application_1/widgets/custom_avatar.dart';
 import 'package:flutter_application_1/widgets/custom_text.dart';
 // import 'package:url_launcher/url_launcher.dart';
@@ -35,6 +38,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 4.0, right: horizontalPadding),
       child: AppBar(
+        scrolledUnderElevation: 0, // scroll 할 때 색상 변경 x
         backgroundColor: colorMode == 'dark'
             ? Colors.black
             : Theme.of(context).appBarTheme.backgroundColor,
@@ -93,6 +97,8 @@ class MenuScreen extends StatelessWidget {
     CouponItem(text: '앱 설정', screenBuilder: (context) => FAQsScreen()),
   ];
 
+  MenuScreen({super.key});
+
   // URL을 열기 위한 함수
   // Future<void> _launchURL(String url) async {
   //   if (await canLaunch(url)) {
@@ -134,11 +140,12 @@ class MenuScreen extends StatelessWidget {
               size: 'large',
               imageUrl: '',
             ),
-            title: CustomText(variant: 'h4', text: '반가워요!'),
-            subtitle: CustomText(variant: 'label2', text: '로그인하고 혜택받기'),
+            title: CustomText(variant: VariantType.h4, text: '반가워요!'),
+            subtitle:
+                CustomText(variant: VariantType.label2, text: '로그인하고 혜택받기'),
             onTap: () {
-              // Navigator.push(
-              //     context, MaterialPageRoute(builder: (context) => ));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()));
               debugPrint('Pressed');
             },
           ),
@@ -189,23 +196,25 @@ class MenuScreen extends StatelessWidget {
           SizedBox(height: 40.0),
 
           // 다른 메뉴 항목 추가
-          CustomText(variant: 'label2', text: '혜택 정보'),
+          CustomText(variant: VariantType.label2, text: '혜택 정보'),
           SizedBox(height: 8.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
                 flex: 1,
-                child: Container(
+                child: SizedBox(
                   height: 32,
-                  child: CustomText(variant: 'label1bold', text: '진행 중인 이벤트'),
+                  child: CustomText(
+                      variant: VariantType.label1Bold, text: '진행 중인 이벤트'),
                 ),
               ),
               Expanded(
                 flex: 1,
-                child: Container(
+                child: SizedBox(
                   height: 32,
-                  child: CustomText(variant: 'label1bold', text: '쿠폰 등록'),
+                  child: CustomText(
+                      variant: VariantType.label1Bold, text: '쿠폰 등록'),
                 ),
               ),
             ],
@@ -213,9 +222,9 @@ class MenuScreen extends StatelessWidget {
 
           SizedBox(height: 40.0),
 
-          CustomText(variant: 'label2', text: '혜택 정보'),
+          CustomText(variant: VariantType.label2, text: '혜택 정보'),
           SizedBox(height: 8.0),
-          Container(
+          SizedBox(
             height: 100, // 높이 지정
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -237,7 +246,7 @@ class MenuScreen extends StatelessWidget {
                   },
                   child: Container(
                     child: CustomText(
-                      variant: 'label1bold',
+                      variant: VariantType.label1Bold,
                       text: couponItems[index].text, // 고정된 텍스트 사용
                     ),
                   ),
@@ -247,7 +256,8 @@ class MenuScreen extends StatelessWidget {
           ),
 
           CustomText(
-              text: 'Ⓒ 2025. Insplanet all right reserved.', variant: 'label3')
+              text: 'Ⓒ 2025. Insplanet all right reserved.',
+              variant: VariantType.label3)
         ],
       ),
     );

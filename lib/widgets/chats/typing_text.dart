@@ -8,7 +8,7 @@ class TypingText extends StatefulWidget {
   final Function(double progress)? onProgress;
 
   // CustomText 관련 추가 파라미터
-  final String variant;
+  final VariantType variant;
   final Color color;
   final TextAlign textAlign;
   final TextOverflow overflow;
@@ -17,12 +17,12 @@ class TypingText extends StatefulWidget {
     required this.text,
     this.speed = const Duration(milliseconds: 25),
     this.onProgress,
-    this.variant = 'h3', // 기본 스타일
+    this.variant = VariantType.h3, // 기본 스타일
     this.color = Colors.black,
     this.textAlign = TextAlign.start,
     this.overflow = TextOverflow.visible,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<TypingText> createState() => _TypingTextState();
