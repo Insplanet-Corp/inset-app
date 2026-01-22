@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/screens/edit_template_screen.dart';
 import 'package:flutter_application_1/screens/template_recommended_product_detail_screen.dart';
 import 'package:flutter_application_1/widgets/custom_button.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -157,14 +158,24 @@ class _TemplateScreenState extends State<TemplateScreen> {
                     physics:
                         NeverScrollableScrollPhysics(), // 스크롤 충돌 방지 (부모가 스크롤하므로 내부 스크롤 막기)
                     itemBuilder: (context, index) {
-                      return Container(
-                        height: heights[index].toDouble(),
-                        decoration: BoxDecoration(
-                          color: Colors.teal[100 * ((index % 8) + 1)],
-                          border: Border.all(color: Colors.black, width: 1),
-                          borderRadius: BorderRadius.circular(8),
+                      return GestureDetector(
+                        onTap: () {
+                          if (index == 0) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (_) => const EditTemplateScreen()),
+                            );
+                          }
+                        },
+                        child: Container(
+                          height: heights[index].toDouble(),
+                          decoration: BoxDecoration(
+                            color: Colors.teal[100 * ((index % 8) + 1)],
+                            border: Border.all(color: Colors.black, width: 1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Center(child: Text('Item $index')),
                         ),
-                        child: Center(child: Text('Item $index')),
                       );
                     },
                   )

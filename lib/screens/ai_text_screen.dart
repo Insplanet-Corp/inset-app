@@ -35,7 +35,6 @@ class AiTextScreen extends StatefulWidget {
 }
 
 class _AiTextScreenState extends State<AiTextScreen> {
-  // * instance
   // 첫 버튼 클릭시
   bool selected = false;
   ButtonState selectedButtonState = ButtonState.nullState;

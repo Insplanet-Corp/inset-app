@@ -33,7 +33,6 @@ class _AIImageScreenState extends State<AIImageScreen> {
   ButtonAction2? selectedAction2;
 
   final ImagePicker _picker = ImagePicker();
-  XFile? _pickedImage;
   Uint8List? _bgRemovedPng;
   bool _removingBg = false;
 
@@ -109,7 +108,6 @@ class _AIImageScreenState extends State<AIImageScreen> {
   Future<void> _pickFromGallery() async {
     final file = await _picker.pickImage(source: ImageSource.gallery);
     if (file == null) return; // 취소
-    // setState(() => _pickedImage = file);
     setState(() {
       _removingBg = true;
       _bgRemovedPng = null;

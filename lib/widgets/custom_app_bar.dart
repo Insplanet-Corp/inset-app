@@ -95,6 +95,7 @@ class MenuScreen extends StatelessWidget {
     CouponItem(text: '쉬운 가이드', screenBuilder: (context) => FAQsScreen()),
     CouponItem(text: '약관 및 정책', screenBuilder: (context) => FAQsScreen()),
     CouponItem(text: '앱 설정', screenBuilder: (context) => FAQsScreen()),
+    CouponItem(text: '템플릿', screenBuilder: (context) => TemplateScreen())
   ];
 
   MenuScreen({super.key});
@@ -107,6 +108,10 @@ class MenuScreen extends StatelessWidget {
   //     throw 'Could not launch $url';
   //   }
   // }
+
+  //   Navigator.of(context).push(
+  //   MaterialPageRoute(builder: (_) => const TemplateScreen());
+  // )
 
   @override
   Widget build(BuildContext context) {
@@ -198,34 +203,8 @@ class MenuScreen extends StatelessWidget {
           // 다른 메뉴 항목 추가
           CustomText(variant: VariantType.label2, text: '혜택 정보'),
           SizedBox(height: 8.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 1,
-                child: SizedBox(
-                  height: 32,
-                  child: CustomText(
-                      variant: VariantType.label1Bold, text: '진행 중인 이벤트'),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: SizedBox(
-                  height: 32,
-                  child: CustomText(
-                      variant: VariantType.label1Bold, text: '쿠폰 등록'),
-                ),
-              ),
-            ],
-          ),
-
-          SizedBox(height: 40.0),
-
-          CustomText(variant: VariantType.label2, text: '혜택 정보'),
-          SizedBox(height: 8.0),
           SizedBox(
-            height: 100, // 높이 지정
+            height: 30, // 높이 지정
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, // 한 줄에 2개의 항목을 배치 (50% 너비)
@@ -244,11 +223,69 @@ class MenuScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Container(
-                    child: CustomText(
-                      variant: VariantType.label1Bold,
-                      text: couponItems[index].text, // 고정된 텍스트 사용
-                    ),
+                  child: CustomText(
+                    variant: VariantType.label1Bold,
+                    text: couponItems[index].text, // 고정된 텍스트 사용
+                  ),
+                );
+              },
+            ),
+          ),
+
+          SizedBox(height: 40.0),
+
+          CustomText(variant: VariantType.label2, text: '혜택 정보'),
+          SizedBox(height: 8.0),
+          SizedBox(
+            height: 30, // 높이 지정
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // 한 줄에 2개의 항목을 배치 (50% 너비)
+                crossAxisSpacing: 24.0, // 항목 간의 수평 간격
+                mainAxisSpacing: 8.0, // 항목 간의 수직 간격
+              ),
+              itemCount: 3, // 항목 수
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            couponItems[index].screenBuilder(context),
+                      ),
+                    );
+                  },
+                  child: CustomText(
+                    variant: VariantType.label1Bold,
+                    text: couponItems[index].text, // 고정된 텍스트 사용
+                  ),
+                );
+              },
+            ),
+          ),
+          SizedBox(
+            height: 100, // 높이 지정
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // 한 줄에 2개의 항목을 배치 (50% 너비)
+                crossAxisSpacing: 24.0, // 항목 간의 수평 간격
+                mainAxisSpacing: 8.0, // 항목 간의 수직 간격
+              ),
+              itemCount: 3, // 항목 수
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TemplateScreen(),
+                      ),
+                    );
+                  },
+                  child: CustomText(
+                    variant: VariantType.label1Bold,
+                    text: couponItems[index].text, // 고정된 텍스트 사용
                   ),
                 );
               },
