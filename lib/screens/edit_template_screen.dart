@@ -2,7 +2,12 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:gal/gal.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 enum LayerType { text, image }
 
@@ -105,6 +110,9 @@ class _EditTemplateScreenState extends State<EditTemplateScreen>
   bool _editing = false;
   late final AnimationController _wiggleCtrl;
 
+  final GlobalKey _canvasKey = GlobalKey();
+  bool _exporting = false;
+
   @override
   void initState() {
     super.initState();
@@ -189,6 +197,43 @@ class _EditTemplateScreenState extends State<EditTemplateScreen>
       _layers.add(layer);
       _selectedLayerId = id; // 추가되면 선택 상태로
     });
+  }
+
+  Future<void> _saveCanvasToGallery() async {
+    setState(() => _exporting = true); // 핸들/가이드 숨기기 용도
+    await Future.delayed(const Duration(milliseconds: 16)); // 한 프레임 기다림
+
+    try {
+      final boundary = _canvasKey.currentContext!.findRenderObject()
+          as RenderRepaintBoundary;
+
+      // 해상도(원하는 만큼 올리기)
+      final ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+
+      final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      if (byteData == null) throw Exception("PNG 변환 실패");
+
+      final Uint8List pngBytes = byteData.buffer.asUint8List();
+
+      // 갤러리에 저장
+      await Gal.putImageBytes(pngBytes);
+
+      // 필요하면 토스트/스낵바
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("갤러리에 저장 완료!")),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        print("저장 실패: $e");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("저장 실패: $e")),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _exporting = false);
+    }
   }
 
   Future<void> _addImageLayer() async {
@@ -429,29 +474,32 @@ class _EditTemplateScreenState extends State<EditTemplateScreen>
   }
 
   Widget _buildCanvas() {
-    return GestureDetector(
-      onTap: () {
-        if (_editing) {
-          _exitEditMode();
-        }
-        if (_selectedLayerId != null) {
-          setState(() {
-            _selectedLayerId = null;
-          });
-        }
-      },
-      child: Container(
-        color: const Color(0xFF1D1E20),
-        child: Center(
-          child: AspectRatio(
-            aspectRatio: 9 / 16, // 캔버스 비율(원하는 걸로 변경)
-            child: Container(
-              color: const Color(0xFF2A2B2E), // 캔버스 배경
-              child: Stack(
-                children: [
-                  // 레이어 렌더
-                  ..._layers.map(_buildLayerWidget),
-                ],
+    return RepaintBoundary(
+      key: _canvasKey,
+      child: GestureDetector(
+        onTap: () {
+          if (_editing) {
+            _exitEditMode();
+          }
+          if (_selectedLayerId != null) {
+            setState(() {
+              _selectedLayerId = null;
+            });
+          }
+        },
+        child: Container(
+          color: const Color(0xFF1D1E20),
+          child: Center(
+            child: AspectRatio(
+              aspectRatio: 9 / 16, // 캔버스 비율(원하는 걸로 변경)
+              child: Container(
+                color: const Color(0xFF2A2B2E), // 캔버스 배경
+                child: Stack(
+                  children: [
+                    // 레이어 렌더
+                    ..._layers.map(_buildLayerWidget),
+                  ],
+                ),
               ),
             ),
           ),
@@ -491,7 +539,6 @@ class _EditTemplateScreenState extends State<EditTemplateScreen>
           width: layer.w,
           height: layer.h,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
             child: (layer.imageBytes == null)
                 ? const Center(child: Text("이미지 없음"))
                 : Image.memory(layer.imageBytes!, fit: layer.fit),
@@ -671,6 +718,7 @@ class _EditTemplateScreenState extends State<EditTemplateScreen>
           GestureDetector(
             onTap: () {
               print("save btn action");
+              _saveCanvasToGallery();
             },
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
