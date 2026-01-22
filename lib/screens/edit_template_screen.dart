@@ -429,18 +429,30 @@ class _EditTemplateScreenState extends State<EditTemplateScreen>
   }
 
   Widget _buildCanvas() {
-    return Container(
-      color: const Color(0xFF1D1E20),
-      child: Center(
-        child: AspectRatio(
-          aspectRatio: 9 / 16, // 캔버스 비율(원하는 걸로 변경)
-          child: Container(
-            color: const Color(0xFF2A2B2E), // 캔버스 배경
-            child: Stack(
-              children: [
-                // 레이어 렌더
-                ..._layers.map(_buildLayerWidget),
-              ],
+    return GestureDetector(
+      onTap: () {
+        if (_editing) {
+          _exitEditMode();
+        }
+        if (_selectedLayerId != null) {
+          setState(() {
+            _selectedLayerId = null;
+          });
+        }
+      },
+      child: Container(
+        color: const Color(0xFF1D1E20),
+        child: Center(
+          child: AspectRatio(
+            aspectRatio: 9 / 16, // 캔버스 비율(원하는 걸로 변경)
+            child: Container(
+              color: const Color(0xFF2A2B2E), // 캔버스 배경
+              child: Stack(
+                children: [
+                  // 레이어 렌더
+                  ..._layers.map(_buildLayerWidget),
+                ],
+              ),
             ),
           ),
         ),
@@ -703,50 +715,115 @@ class _EditTemplateScreenState extends State<EditTemplateScreen>
                   }
                   return false;
                 },
-                child: ListView.separated(
+                child: ReorderableListView.builder(
                   physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
+                  buildDefaultDragHandles: false,
                   itemCount: _layers.length + 1,
-                  separatorBuilder: (_, __) => const SizedBox(width: 12),
+                  onReorder: (oldIndex, newIndex) {
+                    // + 버튼(0번)은 reorder 제외
+                    if (oldIndex == 0 || newIndex == 0) return;
+
+                    // Reorderable 규칙: newIndex가 oldIndex보다 크면 -1
+                    if (newIndex > oldIndex) newIndex -= 1;
+
+                    setState(() {
+                      final item = _layers.removeAt(oldIndex - 1);
+                      _layers.insert(newIndex - 1, item);
+                    });
+                  },
                   itemBuilder: (context, index) {
                     if (index == 0) {
-                      return _buildAddButton();
-                    } else {
-                      final layer = _layers[index - 1];
-
-                      final icon = (layer.type == LayerType.text)
-                          ? Icons.text_fields_rounded
-                          : Icons.photo;
-
-                      return GestureDetector(
-                        onLongPress: () {
-                          print("longPress");
-                        },
-                        onTap: () {
-                          setState(() {
-                            _selectedLayerId = layer.id;
-                          });
-                        },
-                        child: Container(
-                          width: 64,
-                          height: 96,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.white),
-                          child: Icon(
-                            icon,
-                            size: 50,
-                            color: Color(0xFFB9B9B9),
-                          ),
-                        ),
+                      return Padding(
+                        key: ValueKey("add"),
+                        padding: EdgeInsets.only(right: 12),
+                        child: _buildAddButton(),
                       );
                     }
+                    final layer = _layers[index - 1];
+
+                    return Padding(
+                      key: ValueKey(layer.id),
+                      padding: const EdgeInsets.only(right: 12),
+                      child: _layerTile(layer),
+                    );
                   },
                 ),
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  GestureDetector _layerTile(Layer layer) {
+    final icon = (layer.type == LayerType.text)
+        ? Icons.text_fields_rounded
+        : Icons.photo;
+
+    final selected = _selectedLayerId == layer.id;
+
+    return GestureDetector(
+      onLongPress: _enterEditMode,
+      onTap: () {
+        setState(() {
+          _selectedLayerId = layer.id;
+        });
+      },
+      child: AnimatedBuilder(
+        animation: _wiggleCtrl,
+        builder: (context, child) {
+          final angle = _editing ? _wiggleCtrl.value : 0.0;
+          return Transform.rotate(
+            angle: angle,
+            child: child,
+          );
+        },
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            ReorderableDragStartListener(
+              enabled: _editing,
+              index: _layers.indexWhere((l) => l.id == layer.id) + 1,
+              child: Container(
+                width: 64,
+                height: 96,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.white),
+                child: Icon(
+                  icon,
+                  size: 50,
+                  color: Color(0xFFB9B9B9),
+                ),
+              ),
+            ),
+            if (_editing)
+              Positioned(
+                top: -8,
+                right: -8,
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _layers.removeWhere((l) => l.id == layer.id);
+                      if (_selectedLayerId == layer.id) _selectedLayerId = null;
+                    });
+                  },
+                  child: Container(
+                    width: 22,
+                    height: 22,
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                      shape: BoxShape.circle,
+                    ),
+                    child:
+                        const Icon(Icons.close, size: 14, color: Colors.white),
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );
