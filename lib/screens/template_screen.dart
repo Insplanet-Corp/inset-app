@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/screens/edit_template_screen.dart';
 import 'package:flutter_application_1/screens/template_recommended_product_detail_screen.dart';
+import 'package:flutter_application_1/screens/webview_screen.dart';
 import 'package:flutter_application_1/widgets/custom_button.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_application_1/widgets/custom_app_bar.dart';
@@ -165,6 +166,9 @@ class _TemplateScreenState extends State<TemplateScreen> {
                               MaterialPageRoute(
                                   builder: (_) => const EditTemplateScreen()),
                             );
+                          } else if (index == 1) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => WebviewScreen()));
                           }
                         },
                         child: Container(

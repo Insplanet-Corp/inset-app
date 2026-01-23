@@ -88,7 +88,7 @@ class _AiTextScreenState extends State<AiTextScreen> {
     String finalText = selectedASK() + text;
     print(finalText);
     final resp = await http.post(
-      Uri.parse('http://192.168.68.70:3000/chat'),
+      Uri.parse('http://localhost:3000/chat'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         "messages": [
@@ -102,6 +102,7 @@ class _AiTextScreenState extends State<AiTextScreen> {
     }
 
     final data = jsonDecode(resp.body) as Map<String, dynamic>;
+    print("data : ${data['text']}");
     return (data['text'] ?? '').toString();
   }
 
