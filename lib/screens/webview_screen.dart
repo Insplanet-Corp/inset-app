@@ -45,65 +45,65 @@ class _WebviewScreenState extends State<WebviewScreen> {
           return NavigationDecision.navigate;
         },
       ))
-      ..loadRequest(Uri.parse("http://192.168.68.60:5173"));
+      ..loadRequest(Uri.parse("http://192.168.68.55:5173/edit"));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF1D1E20),
-      appBar: AppBar(
-        foregroundColor: Colors.white,
-        backgroundColor: Color(0xFF1D1E20),
-        actions: [
-          IconButton(
-            onPressed: () {
-              print("layer onPressed");
-              // openHalfSheet(context);
-            },
-            icon: Icon(Icons.layers_outlined),
-            iconSize: 30,
-          ),
-          IconButton(
-            onPressed: () {
-              print("all out onPressed");
-            },
-            icon: Icon(Icons.all_out),
-            iconSize: 30,
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          GestureDetector(
-            onTap: () {
-              print("save btn action");
-              // _saveCanvasToGallery();
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(7),
-                  color: Color(0xFFFF938F)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.download_sharp),
-                  SizedBox(
-                    width: 3,
-                  ),
-                  Text(
-                    "저장",
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  )
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   foregroundColor: Colors.white,
+      //   backgroundColor: Color(0xFF1D1E20),
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () {
+      //         print("layer onPressed");
+      //         // openHalfSheet(context);
+      //       },
+      //       icon: Icon(Icons.layers_outlined),
+      //       iconSize: 30,
+      //     ),
+      //     IconButton(
+      //       onPressed: () {
+      //         print("all out onPressed");
+      //       },
+      //       icon: Icon(Icons.all_out),
+      //       iconSize: 30,
+      //     ),
+      //     SizedBox(
+      //       width: 10,
+      //     ),
+      //     GestureDetector(
+      //       onTap: () {
+      //         print("save btn action");
+      //         // _saveCanvasToGallery();
+      //       },
+      //       child: Container(
+      //         padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      //         decoration: BoxDecoration(
+      //             borderRadius: BorderRadius.circular(7),
+      //             color: Color(0xFFFF938F)),
+      //         child: Row(
+      //           mainAxisAlignment: MainAxisAlignment.center,
+      //           children: [
+      //             Icon(Icons.download_sharp),
+      //             SizedBox(
+      //               width: 3,
+      //             ),
+      //             Text(
+      //               "저장",
+      //               style: TextStyle(fontWeight: FontWeight.w600),
+      //             )
+      //           ],
+      //         ),
+      //       ),
+      //     ),
+      //     SizedBox(
+      //       width: 10,
+      //     ),
+      //   ],
+      // ),
       body: Container(
           child: webViewLoading
               ? WebViewWidget(controller: controller)
