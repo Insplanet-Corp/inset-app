@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/firebase_options.dart';
@@ -37,14 +39,9 @@ Future<void> main() async {
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  ); // Firebase 초기화
-
-  // riverpod
-  runApp(
-    ProviderScope(
-      child: MyApp(),
-    ),
   );
+
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 void getData() async {
