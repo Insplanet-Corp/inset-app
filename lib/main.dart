@@ -1,8 +1,8 @@
 import 'dart:io';
 
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_application_1/firebase_options.dart';
+import 'package:flutter_application_1/firebase_options.dart';
 import 'package:flutter_application_1/screens/ai_screen.dart';
 import 'package:flutter_application_1/screens/components_screen.dart';
 import 'package:flutter_application_1/screens/faqs_screen.dart';
@@ -13,8 +13,8 @@ import 'package:flutter_application_1/theme.dart';
 import 'package:flutter_application_1/widgets/custom_app_bar.dart';
 import 'screens/splash_screen.dart';
 
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 // ProviderScope
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,23 +37,23 @@ String helloWorld(Ref ref) {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(const ProviderScope(child: MyApp()));
 }
 
 void getData() async {
-  // FirebaseFirestore db = FirebaseFirestore.instance; // Firestore 인스턴스
+  FirebaseFirestore db = FirebaseFirestore.instance; // Firestore 인스턴스
 
   // 'users' 컬렉션에서 모든 문서 가져오기
-  // QuerySnapshot querySnapshot = await db.collection('users').get();
+  QuerySnapshot querySnapshot = await db.collection('users').get();
 
   // 각 문서의 데이터 출력
-  // for (var doc in querySnapshot.docs) {
-  //   print(doc.data()); // 문서의 데이터를 출력
-  // }
+  for (var doc in querySnapshot.docs) {
+    print(doc.data()); // 문서의 데이터를 출력
+  }
 }
 
 // riverpod ConsumerWidget
@@ -69,8 +69,9 @@ class MyApp extends ConsumerWidget {
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
 
-      // initialRoute:
-      //     FirebaseAuth.instance.currentUser != null ? '/components' : '/components',
+      // initialRoute: FirebaseAuth.instance.currentUser != null
+      //     ? '/components'
+      //     : '/components',
       // initialRoute: '/ai',
       routes: <String, WidgetBuilder>{
         // '/': (BuildContext context) {

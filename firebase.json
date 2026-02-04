@@ -9,7 +9,7 @@
         }
       },
       "dart": {
-        "lib/firebase_options.dart": {
+        "lib/base_options.dart": {
           "projectId": "insplanet-app",
           "configurations": {
             "android": "1:349858250623:android:31aca4501ea7a69178e44a",

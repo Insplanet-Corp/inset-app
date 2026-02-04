@@ -1,7 +1,7 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_application_1/constants/toekns_constants.dart';
+import 'package:flutter_application_1/constants/toekns_constants.dart';
 import 'package:flutter_application_1/widgets/custom_app_bar.dart';
 import 'package:flutter_application_1/widgets/custom_button.dart';
 import 'package:flutter_application_1/widgets/custom_form.dart';
@@ -31,77 +31,77 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String username = _usernameController.text;
     String password = _passwordController.text;
 
-    // try {
-    //   final userCredential =
-    //       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-    //     email: username,
-    //     password: password,
-    //   );
+    try {
+      final userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: username,
+        password: password,
+      );
 
-    //   User? user = userCredential.user;
+      User? user = userCredential.user;
 
-    //   // Firestore에 사용자 정보를 저장
-    //   if (user != null) {
-    //     await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-    //       'email': user.email,
-    //       'username': username,
-    //       'uid': user.uid,
-    //       'profilePicture': '',
-    //       'createdAt': FieldValue.serverTimestamp(),
-    //     });
-    //   }
+      // Firestore에 사용자 정보를 저장
+      if (user != null) {
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'email': user.email,
+          'username': username,
+          'uid': user.uid,
+          'profilePicture': '',
+          'createdAt': FieldValue.serverTimestamp(),
+        });
+      }
 
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(content: Text('가입완료링')),
-    //   );
-    // } on FirebaseAuthException catch (e) {
-    //   String feedbackMessage = '';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('가입완료링')),
+      );
+    } on FirebaseAuthException catch (e) {
+      String feedbackMessage = '';
 
-    //   if (e.code == 'weak-password') {
-    //     feedbackMessage = '비밀번호 6자 이상부탁';
-    //   } else if (e.code == 'email-already-in-use') {
-    //     feedbackMessage = '이미 가입된 이메일이빈다요';
-    //   }
+      if (e.code == 'weak-password') {
+        feedbackMessage = '비밀번호 6자 이상부탁';
+      } else if (e.code == 'email-already-in-use') {
+        feedbackMessage = '이미 가입된 이메일이빈다요';
+      }
 
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(content: Text(feedbackMessage)),
-    //   );
-    // } catch (e) {
-    //   print(e);
-    // }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(feedbackMessage)),
+      );
+    } catch (e) {
+      print(e);
+    }
   }
 
-  // Future<UserCredential> signInWithGoogle() async {
-  //   // Trigger the authentication flow
-  //   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-  //   // Obtain the auth details from the request
-  //   final GoogleSignInAuthentication? googleAuth =
-  //       await googleUser?.authentication;
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
 
-  //   // Create a new credential
-  //   final credential = GoogleAuthProvider.credential(
-  //     accessToken: googleAuth?.accessToken,
-  //     idToken: googleAuth?.idToken,
-  //   );
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
 
-  //   // Once signed in, return the UserCredential
-  //   return await FirebaseAuth.instance.signInWithCredential(credential);
-  // }
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
 
-  // void _login() {
-  //   String username = _controller.text; // TextField의 값 읽기
-  //   print('Entered username: $username');
+  void _login() {
+    String username = _controller.text; // TextField의 값 읽기
+    print('Entered username: $username');
 
-  //   if (_formKey.currentState?.validate() ?? false) {
-  //     Navigator.pushNamed(context, '/home');
-  //   } else {
-  //     // 검증 실패 시 알림
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(content: Text('Please fill in all fields correctly.')),
-  //     );
-  //   }
-  // }
+    if (_formKey.currentState?.validate() ?? false) {
+      Navigator.pushNamed(context, '/home');
+    } else {
+      // 검증 실패 시 알림
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please fill in all fields correctly.')),
+      );
+    }
+  }
 
   // 공통 입력값 검증 함수
   String? commonValidator(String? value, String fieldName) {
@@ -121,12 +121,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: CustomForm(
           formKey: _formKey,
           children: [
-            // CustomButton(
-            //   variant: 'secondary',
-            //   text: '구굴로시작하긔',
-            //   isFullWidth: true,
-            //   onPressed: signInWithGoogle,
-            // ),
+            CustomButton(
+              variant: 'secondary',
+              text: '구굴로시작하긔',
+              isFullWidth: true,
+              onPressed: signInWithGoogle,
+            ),
 
             CustomTextField(
               controller: _usernameController,
