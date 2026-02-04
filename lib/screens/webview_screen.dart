@@ -5,7 +5,8 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebviewScreen extends StatefulWidget {
-  const WebviewScreen({super.key});
+  final String templateId;
+  const WebviewScreen({super.key, required this.templateId});
 
   @override
   State<WebviewScreen> createState() => _WebviewScreenState();
@@ -18,6 +19,7 @@ class _WebviewScreenState extends State<WebviewScreen> {
   @override
   void initState() {
     super.initState();
+
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(NavigationDelegate(
@@ -54,7 +56,8 @@ class _WebviewScreenState extends State<WebviewScreen> {
         print("data $data");
         Navigator.of(context).pop();
       })
-      ..loadRequest(Uri.parse("http://192.168.68.55:5173/"));
+      ..loadRequest(Uri.parse("http://192.168.68.56:5173/")
+          .replace(queryParameters: {"templateId": widget.templateId}));
   }
 
   @override

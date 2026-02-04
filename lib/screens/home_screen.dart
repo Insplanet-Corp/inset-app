@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/providers/test_provider.dart';
 import 'package:flutter_application_1/screens/ai_screen.dart';
@@ -10,7 +10,7 @@ import 'package:flutter_application_1/screens/profile_screen.dart';
 import 'package:flutter_application_1/widgets/custom_app_bar.dart';
 import 'package:flutter_application_1/widgets/custom_navigation_bar.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // class HomeScreen extends StatelessWidget {
@@ -45,7 +45,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final FirebaseFirestore db = FirebaseFirestore.instance;
+  // final FirebaseFirestore db = FirebaseFirestore.instance;
 
   final _navigatorKeys = [
     GlobalKey<NavigatorState>(),
@@ -79,13 +79,13 @@ class _HomeScreenState extends State<HomeScreen> {
   // Firestore에서 데이터를 가져오는 메서드
   Future<List<Map<String, dynamic>>> getData() async {
     try {
-      QuerySnapshot querySnapshot = await db.collection('product').get();
+      // QuerySnapshot querySnapshot = await db.collection('product').get();
 
       // 각 문서에서 데이터를 가져오기
       List<Map<String, dynamic>> usersList = [];
-      for (var doc in querySnapshot.docs) {
-        usersList.add(doc.data() as Map<String, dynamic>);
-      }
+      // for (var doc in querySnapshot.docs) {
+      //   usersList.add(doc.data() as Map<String, dynamic>);
+      // }
       return usersList;
     } catch (e) {
       print('Error occurred: $e');
@@ -97,27 +97,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // List _pages = [];
 
-  User? _user;
+  // User? _user;
 
   @override
   void initState() {
     super.initState();
     _getUserInfo();
 
-    print(_user);
+    // print(_user);
   }
 
   Future<void> _getUserInfo() async {
-    User? user = FirebaseAuth.instance.currentUser;
+    // User? user = FirebaseAuth.instance.currentUser;
 
-    setState(() {
-      _user = user;
-    });
+    // setState(() {
+    //   _user = user;
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    // final ThemeData theme = Theme.of(context);
     return Scaffold(
       // appBar: CustomAppBar(
       //   // leading: Padding(
@@ -209,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           _buildTabNavigator(0, TemplateScreen()),
           _buildTabNavigator(1, AIScreen()),
-          _buildTabNavigator(2, ProfileScreen()),
+          // _buildTabNavigator(2, ProfileScreen()),
         ],
       ),
       // ),

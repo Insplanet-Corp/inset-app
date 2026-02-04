@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/home_screen.dart';
 import 'package:flutter_application_1/widgets/custom_app_bar.dart';
@@ -22,7 +22,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _controller = TextEditingController();
+  // final TextEditingController _controller = TextEditingController();
 
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -31,49 +31,49 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
   // 로그인 성공 후 사용자 정보를 저장할 변수 추가
-  User? _currentUser;
+  // User? _currentUser;
 
   void _login() async {
     String username = _usernameController.text;
     String password = _passwordController.text;
 
     if (_formKey.currentState?.validate() ?? false) {
-      try {
-        final credential = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: username, password: password);
+      // try {
+      //   // final credential = await FirebaseAuth.instance
+      //       // .signInWithEmailAndPassword(email: username, password: password);
 
-        // Navigator.pushNamed(context, '/');
-        // Navigator.pushReplacementNamed(context, '/')
+      //   // Navigator.pushNamed(context, '/');
+      //   // Navigator.pushReplacementNamed(context, '/')
 
-        // currentUser가 null이 될 수 있는 이유는 2가지입니다.
-        // 사용자가 로그인하지 않았습니다.
-        // 인증 객체의 초기화가 완료되지 않았습니다.
-        // 리스너를 사용해 사용자의 로그인 상태를 추적하면 이러한 상황을 처리할 필요가 없습니다.
-        FirebaseAuth.instance.authStateChanges().listen((User? user) {
-          if (user != null) {
-            debugPrint(user.uid);
-          }
-        });
-      } on FirebaseAuthException catch (e) {
-        // 오류 처리
-        String newErrorMessage = '';
-        if (e.code == 'invalid-email') {
-          newErrorMessage = '이메일 양식이 아닙니다.';
-        } else {
-          newErrorMessage = '이메일 또는 비밀번호가 잘못 되었습니다.';
-        }
+      //   // currentUser가 null이 될 수 있는 이유는 2가지입니다.
+      //   // 사용자가 로그인하지 않았습니다.
+      //   // 인증 객체의 초기화가 완료되지 않았습니다.
+      //   // 리스너를 사용해 사용자의 로그인 상태를 추적하면 이러한 상황을 처리할 필요가 없습니다.
+      //   // FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      //   //   if (user != null) {
+      //   //     debugPrint(user.uid);
+      //   //   }
+      //   // });
+      // } on FirebaseAuthException catch (e) {
+      //   // 오류 처리
+      //   String newErrorMessage = '';
+      //   if (e.code == 'invalid-email') {
+      //     newErrorMessage = '이메일 양식이 아닙니다.';
+      //   } else {
+      //     newErrorMessage = '이메일 또는 비밀번호가 잘못 되었습니다.';
+      //   }
 
-        setState(() {
-          errorMessage = newErrorMessage;
-        });
-      } catch (e) {
-        // 일반적인 오류 처리
-        debugPrint("General error: $e");
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text('Something went wrong. Please try again later.')),
-        );
-      }
+      //   setState(() {
+      //     errorMessage = newErrorMessage;
+      //   });
+      // } catch (e) {
+      //   // 일반적인 오류 처리
+      //   debugPrint("General error: $e");
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     SnackBar(
+      //         content: Text('Something went wrong. Please try again later.')),
+      //   );
+      // }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Please fill in all fields correctly.')),
@@ -85,52 +85,52 @@ class _LoginScreenState extends State<LoginScreen> {
     String username = _usernameController.text;
     String password = _passwordController.text;
 
-    try {
-      final userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: username,
-        password: password,
-      );
+    // try {
+    //   final userCredential =
+    //       await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    //     email: username,
+    //     password: password,
+    //   );
 
-      User? user = userCredential.user;
+    //   User? user = userCredential.user;
 
-      // Firestore에 사용자 정보를 저장
-      if (user != null) {
-        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-          'email': user.email,
-          'username': username,
-          'uid': user.uid,
-          'profilePicture': '',
-          'createdAt': FieldValue.serverTimestamp(),
-        });
-      }
+    //   Firestore에 사용자 정보를 저장
+    //   if (user != null) {
+    //     await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+    //       'email': user.email,
+    //       'username': username,
+    //       'uid': user.uid,
+    //       'profilePicture': '',
+    //       'createdAt': FieldValue.serverTimestamp(),
+    //     });
+    //   }
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('가입완료링')),
-      );
-    } on FirebaseAuthException catch (e) {
-      String feedbackMessage = '';
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(content: Text('가입완료링')),
+    //   );
+    // } on FirebaseAuthException catch (e) {
+    //   String feedbackMessage = '';
 
-      if (e.code == 'weak-password') {
-        feedbackMessage = '비밀번호 6자 이상부탁';
-      } else if (e.code == 'email-already-in-use') {
-        // 유저가 있으면?
-        feedbackMessage = '이미 가입된 이메일이빈다요';
-      }
+    //   if (e.code == 'weak-password') {
+    //     feedbackMessage = '비밀번호 6자 이상부탁';
+    //   } else if (e.code == 'email-already-in-use') {
+    //     // 유저가 있으면?
+    //     feedbackMessage = '이미 가입된 이메일이빈다요';
+    //   }
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(feedbackMessage)),
-      );
-    } catch (e) {
-      debugPrint("error: $e");
-    }
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(content: Text(feedbackMessage)),
+    //   );
+    // } catch (e) {
+    //   debugPrint("error: $e");
+    // }
   }
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  // final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['email'], // 최소한의 정보만 요청
   );
-  User? _user; // 현재 로그인된 사용자 정보
+  // User? _user; // 현재 로그인된 사용자 정보
 
   Future<void> _signInWithGoogle() async {
     try {
@@ -146,20 +146,20 @@ class _LoginScreenState extends State<LoginScreen> {
           await googleUser.authentication;
 
       // Firebase 자격 증명 생성
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
+      // final AuthCredential credential = GoogleAuthProvider.credential(
+      //   accessToken: googleAuth.accessToken,
+      //   idToken: googleAuth.idToken,
+      // );
 
       // Firebase에 로그인
-      final UserCredential userCredential =
-          await _auth.signInWithCredential(credential);
+      // final UserCredential userCredential =
+      //     await _auth.signInWithCredential(credential);
 
-      setState(() {
-        _user = userCredential.user;
-      });
+      // setState(() {
+      //   _user = userCredential.user;
+      // });
 
-      debugPrint("Signed in with Google: ${_user?.displayName}");
+      // debugPrint("Signed in with Google: ${_user?.displayName}");
 
       Navigator.push(
         context,
@@ -283,17 +283,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 text: '로그인하고 AI와 함께 상세페이지를 만들어요!'),
             SizedBox(height: 40),
 
-            if (_user != null)
-              Column(
-                children: [
-                  Text("Welcome, ${_user!.displayName}"),
-                  Text("Email: ${_user!.email}"),
-                  // ElevatedButton(
-                  //   onPressed: _signOut,
-                  //   child: Text("Sign Out"),
-                  // ),
-                ],
-              ),
+            // if (_user != null)
+            //   Column(
+            //     children: [
+            //       Text("Welcome, ${_user!.displayName}"),
+            //       Text("Email: ${_user!.email}"),
+            //       // ElevatedButton(
+            //       //   onPressed: _signOut,
+            //       //   child: Text("Sign Out"),
+            //       // ),
+            //     ],
+            //   ),
 
             SizedBox(
               width: double.infinity,

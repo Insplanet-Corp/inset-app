@@ -161,15 +161,15 @@ class _TemplateScreenState extends State<TemplateScreen> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          if (index == 0) {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (_) => const EditTemplateScreen()),
-                            );
-                          } else if (index == 1) {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => WebviewScreen()));
-                          }
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //       builder: (_) => const EditTemplateScreen()),
+                          // );
+
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => WebviewScreen(
+                                    templateId: "InsetTemplate_$index",
+                                  )));
                         },
                         child: Container(
                           height: heights[index].toDouble(),

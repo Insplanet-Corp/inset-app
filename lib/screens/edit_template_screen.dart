@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:gal/gal.dart';
+// import 'package:gal/gal.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'dart:typed_data';
@@ -216,7 +216,7 @@ class _EditTemplateScreenState extends State<EditTemplateScreen>
       final Uint8List pngBytes = byteData.buffer.asUint8List();
 
       // 갤러리에 저장
-      await Gal.putImageBytes(pngBytes);
+      // await Gal.putImageBytes(pngBytes);
 
       // 필요하면 토스트/스낵바
       if (mounted) {
